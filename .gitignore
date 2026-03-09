@@ -1,0 +1,66 @@
+# ==========================================
+# 1. Hugo 构建生成的文件（核心！绝对不能推）
+# ==========================================
+# Hugo 生成的静态网站目录（Cloudflare 会自己构建）
+/public/
+# Hugo 生成的资源缓存（图片处理、Sass 编译等）
+/resources/_gen/
+# Hugo 构建锁文件（新版本 Hugo 会生成）
+.hugo_build.lock        
+
+# ==========================================
+# 2. 操作系统临时文件（Windows/Mac 通用）
+# ==========================================
+# Windows
+# Windows 缩略图缓存
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+# Office 临时文件（比如 ~$document.docx）
+~$*                      
+
+# Mac（虽然你用 Windows，但跨平台协作时有用）
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ==========================================
+# 3. 编辑器/IDE 临时文件（覆盖主流编辑器）
+# ==========================================
+# VS Code
+# 工作区设置（可选，如果你想共享设置可以删掉这行）
+.vscode/
+*.code-workspace
+
+# IntelliJ IDEA / GoLand / WebStorm
+.idea/
+*.iml
+
+# Vim / Neovim
+*.swp
+*.swo
+*~
+.un~
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ==========================================
+# 4. 可选：依赖管理文件（如果你的主题需要 Node.js）
+# ==========================================
+# 部分 Hugo 主题可能用 npm/yarn/pnpm 安装前端依赖
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ==========================================
+# 5. 其他临时文件
+# ==========================================
+# 日志文件
+*.log
+# 临时文件
+*.tmp
+# 备份文件
+*.bak
