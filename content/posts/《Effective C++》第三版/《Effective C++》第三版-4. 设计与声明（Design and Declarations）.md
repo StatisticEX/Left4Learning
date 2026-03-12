@@ -1,3 +1,30 @@
+---
+title: "《Effective C++》第三版-4. 设计与声明（Design and Declarations）"
+subtitle: ""
+date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["C++"]
+categories: ["编程语言"]
+series: ["《Effective C++》第三版"]
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+lightgallery: true
+---
+
 [TOC]
 
 # 条款17：让接口容易被正确使用，不易被误用（Make interfaces easy to use correctly and hard to use incorrectly）
@@ -11,6 +38,7 @@ public:
 	...
 };
 ```
+<!--more-->
 
 可使用类型系统（type system）规避以上错误，即引入外覆类型（wrapper type）区别年月日：
 

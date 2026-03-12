@@ -1,3 +1,30 @@
+---
+title: "《Effective C++》第三版-5. 实现（Implementations）"
+subtitle: ""
+date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["C++"]
+categories: ["编程语言"]
+series: ["《Effective C++》第三版"]
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+lightgallery: true
+---
+
 [TOC]
 
 # 条款26：尽可能延后变量定义式的出现时间（Postpone variable definitions as long as possible）
@@ -5,7 +32,6 @@
 **应延后变量的定义，知道不得不使用该变量的前一刻为止，甚至直到能够给他初值实参为止**
 
 > 当程序的控制流达到变量的定义式时，会有构造成本；当离开变量的作用域时，会有析构成本
-> 
 
 ```cpp
 std::string encryptPassword(const std::string& password)
@@ -16,6 +42,7 @@ std::string encryptPassword(const std::string& password)
 	return encrypted;
 }
 ```
+<!--more-->
 
 考虑在循环中使用的变量：
 

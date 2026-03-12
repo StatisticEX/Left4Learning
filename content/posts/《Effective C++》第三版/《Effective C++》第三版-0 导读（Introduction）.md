@@ -1,3 +1,30 @@
+---
+title: "《Effective C++》第三版-0 导读（Introduction）"
+subtitle: ""
+date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["C++"]
+categories: ["编程语言"]
+series: ["《Effective C++》第三版"]
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+lightgallery: true
+---
+
 [TOC]
 
 # 术语（Terminology）
@@ -11,6 +38,8 @@ class Widget;  //类（class）声明式
 template<typename T>;  //模板（template），“typename”的使用见条款42
 class GraphNode;  
 ```
+
+<!--more-->
 
 **签名式（signature）**：每个函数的声明式揭示其签名式，即其参数和返回类型
 

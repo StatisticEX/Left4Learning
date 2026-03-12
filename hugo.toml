@@ -9,19 +9,38 @@ theme = "DoIt"
   email = "你的邮箱@example.com"  # 选填：你的联系邮箱
   avatar = "/images/avatar.png"  # 选填：你的头像路径（图片需放在 static/images/ 目录下）
 
+[original]
+  name = "Dillon"
+  homepage = "https://dillonzq.com/"
+  repo = "https://github.com/dillonzq/LoveIt/"
+
 [params.math]
   enable = true    # 开启数学公式渲染
   copyTex = true   # 开启 Copy-tex（允许访客复制渲染后的公式源码）
   mhchem = true    # 开启 mhchem（如果你需要写化学方程式，可以开启）
+  use = "katex"
+
+[params.math.katex]
+  enable = true
+  copyTex = true
+  mhchem = true
+  amsfonts = true
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.extensions]
+      # typographer = true
       [markup.goldmark.extensions.passthrough]
         enable = true
         [markup.goldmark.extensions.passthrough.delimiters]
           block = [['\[', '\]'], ['$$', '$$']]
           inline = [['\(', '\)'], ['$', '$']]
+  #   [markup.goldmark.renderer]
+  #     unsafe = true
+  # [markup.highlight]
+  #   codeFences = true
+  #   guessSyntax = true
+
         
 [params.home]
   # [params.home.profile] 是 DoIt 主题配置个人主页的正确位置
@@ -44,6 +63,11 @@ theme = "DoIt"
   GitHub = "你的GitHubID"           # 例如填 "leilei"，主题会自动生成 https://github.com/leilei
   Email = "你的邮箱@xxx.com"        # 例如填 "leilei@xxx.com"，主题会自动生成 mailto:leilei@xxx.com
 
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
 [menu]
   [[menu.main]]
     identifier = "posts"
@@ -52,19 +76,24 @@ theme = "DoIt"
     weight = 1
   [[menu.main]]
     identifier = "categories"
-    name = "技术体系" # 显得比“分类”更专业
+    name = "分类" 
     url = "/categories/"
     weight = 2
   [[menu.main]]
     identifier = "tags"
-    name = "技能栈"   # 显得比“标签”更专业
+    name = "标签" 
     url = "/tags/"
     weight = 3
+  [[menu.main]]
+    identifier = "series"
+    name = "专栏"   # 显得比“标签”更专业
+    url = "/series/"
+    weight = 4
   [[menu.main]]
     identifier = "about"
     name = "关于我"
     url = "/about/"
-    weight = 4
+    weight = 5
 
 
 # [author]
@@ -74,3 +103,7 @@ theme = "DoIt"
 [params.page]
   # 开启文章底部的版权声明（直接写 HTML 字符串，注意外层是单引号）
   license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
+
+[params.ibruce]
+  enable = true       # 开启不蒜子全局统计
+  enablePost = true   # 开启单篇文章阅读量统计

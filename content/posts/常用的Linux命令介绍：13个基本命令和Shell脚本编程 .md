@@ -1,10 +1,37 @@
-# 常用的Linux命令介绍：13个基本命令和Shell脚本编程
+---
+title: "常用的Linux命令介绍：13个基本命令和Shell脚本编程"
+subtitle: ""
+date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["编程"]
+categories: []
+series: []
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+lightgallery: true
+---
 
 *本文档作为笔记整理的初次尝试*
 
 [常用的Linux命令介绍：13个基本命令和Shell脚本编程_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Uv4y127tU/?spm_id_from=333.337.search-card.all.click&vd_source=b5572925fdc8d70ef1e8d435658f8063)
 
 <img src="https://s2.loli.net/2024/01/15/dAGUlxNRDM1KtWP.png" alt="Untitled" style="zoom:67%;" />
+
+<!--more-->
 
 ```
 # 文件和目录操作

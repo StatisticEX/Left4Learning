@@ -1,3 +1,30 @@
+---
+title: "《Effective C++》第三版-3. 资源管理（Resource Management）"
+subtitle: ""
+date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["C++"]
+categories: ["编程语言"]
+series: ["《Effective C++》第三版"]
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+lightgallery: true
+---
+
 [TOC]
 
 *前几章的笔记多有不足，这一章会持续改进*
@@ -19,6 +46,7 @@ void f()
 	delete pInv;  //释放pInv所指对象
 }
 ```
+<!--more-->
 
 解决方案：**把资源放进对象，可利用析构函数自动调用机制确保资源释放**
 

@@ -1,4 +1,29 @@
-# Rethinking Integration of Prediction and Planning in Deep Learning-Based Automated Driving Systems: A Review
+---
+title: "Rethinking Integration of Prediction and Planning in Deep Learning-Based Automated Driving Systems: A Review"
+subtitle: ""
+date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["深度学习", "自动驾驶"]
+categories: ["论文阅读"]
+series: []
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+lightgallery: true
+---
 
 [Rethinking Integration of Prediction and Planning in Deep...](https://arxiv.org/abs/2308.05731)
 
@@ -16,9 +41,13 @@
 - 近期研究表明，集成预测和规划有助于提升驾驶性能。
 - 本文系统性地回顾了最先进的（state-of-the-art，SOTA）**基于深度学习**（deep learning-based）的预测、规划以及综合预测和规划的模型。
 
+<img src="https://s2.loli.net/2024/01/15/1PxVspHTJ2WolSh.png" alt="Untitled" style="zoom: 50%;" />
+
+<!--more-->
+
 # 引言
 
-<img src="https://s2.loli.net/2024/01/15/1PxVspHTJ2WolSh.png" alt="Untitled" style="zoom: 50%;" />
+
 
 - 解耦的预测和规划：这种顺序结构本质上是被动的（reactive），不能表示自车和其他智能体**连续的交互**
 - 集成的预测和规划：可以表示自车和其他智能体**连续的交互**，这种方式称为 **Integrated Prediction and Planning (IPP)**

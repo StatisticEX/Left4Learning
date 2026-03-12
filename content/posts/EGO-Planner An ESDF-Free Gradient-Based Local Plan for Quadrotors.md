@@ -1,4 +1,29 @@
-# EGO-Planner: An ESDF-Free Gradient-Based Local Planner for Quadrotors
+---
+title: "EGO-Planner: An ESDF-Free Gradient-Based Local Planner for Quadrotors"
+subtitle: ""
+date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["无人机"]
+categories: ["论文阅读"]
+series: []
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+lightgallery: true
+---
 
 [EGO-Planner: An ESDF-free Gradient-based Local Planner for Quadrotors](https://arxiv.org/abs/2008.08835)
 
@@ -13,6 +38,8 @@
 - 若轨迹是动力学不可行的，则延长轨迹的时间
 
 <img src="https://s2.loli.net/2024/02/06/Non84mfJv1E3ZpL.png" alt="Untitled" style="zoom:67%;" />
+
+<!--more-->
 
 # 引言
 

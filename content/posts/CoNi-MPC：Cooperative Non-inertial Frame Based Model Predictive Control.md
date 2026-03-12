@@ -1,10 +1,29 @@
 ---
-title: "测试数学公式"
+title: "CoNi-MPC: Cooperative Non-inertial Frame Based Model Predictive Control"
+subtitle: ""
 date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["MPC"]
+categories: ["论文阅读"]
+series: []
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
 math:
   enable: true
+lightgallery: true
 ---
-# CoNi-MPC: Cooperative Non-inertial Frame Based Model Predictive Control
 
 [CoNi-MPC: Cooperative Non-inertial Frame Based Model Predictive Control](https://arxiv.org/abs/2306.11259)
 
@@ -15,6 +34,10 @@ math:
 - 在非惯性系（non-inertial frame）中使用NMPC
 - 需要目标的相对姿态和速度、角速度以及加速度
 - 该框架不需要准确的状态估计、对目标运动模型的先验知识、频繁的重规划
+
+![image-20240206000045533](https://s2.loli.net/2024/02/06/OugRhGZycfX3xUC.png)
+
+<!--more-->
 
 # 引言
 
@@ -27,8 +50,6 @@ math:
 - 通过相对运动模型，将和目标相关的元素组合在一起并使用目标坐标系中的IMU信息替换。避免了使用世界坐标系中的数据。
 - MPC控制器作为一个统一的框架支持多种无人机-目标交互的任务。无需频繁的重规划。
 
-![image-20240206000045533](https://s2.loli.net/2024/02/06/OugRhGZycfX3xUC.png)
-<!--more-->
 # 相关工作
 
 其他工作需要全局状态估计和频繁的全局路径重规划，本文的方法可避免这两项

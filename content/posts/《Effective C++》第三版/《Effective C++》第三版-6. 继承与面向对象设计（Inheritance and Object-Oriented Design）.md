@@ -1,3 +1,30 @@
+---
+title: "《Effective C++》第三版-6. 继承与面向对象设计（Inheritance and Object-Oriented Design）"
+subtitle: ""
+date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["C++"]
+categories: ["编程语言"]
+series: ["《Effective C++》第三版"]
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+lightgallery: true
+---
+
 [TOC]
 
 # 条款32：确定你的public继承塑模出is-a关系（Make sure public inheritance models “is-a”）
@@ -14,6 +41,8 @@
 - B比D表示了一个更为一般的概念，而D比B表现了一个更为特殊的概念
 - 任何可以使用类型B的地方，也能使用类型D；但可以使用类型D的地方却不可以使用类型B
 - D是B，B不是D
+
+<!--more-->
 
 ```cpp
 class Person { ... };

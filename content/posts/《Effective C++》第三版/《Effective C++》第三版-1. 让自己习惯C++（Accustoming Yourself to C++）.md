@@ -1,3 +1,30 @@
+---
+title: "《Effective C++》第三版-1. 让自己习惯C++（Accustoming Yourself to C++）"
+subtitle: ""
+date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["C++"]
+categories: ["编程语言"]
+series: ["《Effective C++》第三版"]
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+lightgallery: true
+---
+
 [TOC]
 
 # 条款01：视C++为一个语言联邦（View C++ as a federation of languages）
@@ -8,6 +35,8 @@ C++有4个主要的次语言（sublanguage）：
 - Object-Oriented C++。这是C with classes部分，包含classes（包括构造函数和析构函数）、封装（encapsulation）、继承（inheritance）、多态（polymorphism）、virtual函数等。
 - Template C++。这是C++泛型编程（generic programming）部分。
 - STL。涉及容器（containers）、迭代器（iterators）、算法（algorithms）、函数对象（function objects）。
+
+<!--more-->
 
 **Tips：**
 

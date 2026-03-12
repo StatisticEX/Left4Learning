@@ -1,3 +1,30 @@
+---
+title: "《Effective C++》第三版-2. 构造析构赋值运算（Constructors，Destructors，and Assignment Operators）"
+subtitle: ""
+date: 2026-03-11
+lastmod: 2026-03-11
+draft: false
+authors: [Yansong Chen]
+description: ""
+
+tags: ["C++"]
+categories: ["编程语言"]
+series: ["《Effective C++》第三版"]
+
+hiddenFromHomePage: false
+hiddenFromSearch: false
+
+featuredImage: ""
+featuredImagePreview: ""
+
+toc:
+  enable: true
+  auto: true
+math:
+  enable: true
+lightgallery: true
+---
+
 [TOC]
 
 *由于本书的翻译腔有点佶屈聱牙，从这一章开始lz会增加转述程度使得文本更流畅*
@@ -7,6 +34,8 @@
 ## 自动生成的函数
 
 空类（empty class）会由编译器自动声明一个**copy构造函数、**一个**copy assignment操作符、**一个**析构函数，**若未手动声明构造函数则还会自动生命一个**default构造函数**
+
+<!--more-->
 
 ```cpp
 class Empty {};  //写一个空类则编译器会自动处理为如下形式
