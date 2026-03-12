@@ -1,0 +1,20 @@
+/* 1. 修复文章标题的左侧缩进，使其与正文对齐 */
+.page.single .content h1,
+.page.single .content h2,
+.page.single .content h3,
+.page.single .content h4,
+.page.single .content h5,
+.page.single .content h6 {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+/* 2. 修复列表（枚举）的缩进 */
+.page.single .content ul,
+.page.single .content ol {
+    /* 方案 A：让列表的文字和正文对齐（前面的圆点会稍微凸出去一点，这是排版学上最推荐的“悬挂缩进”） */
+    padding-left: 1.2em !important; 
+    
+    /* 方案 B：如果你希望前面的圆点和正文对齐，文字往后缩，可以把上面的 1.2em 改成 2em 左右 */
+    /* padding-left: 2em !important; */
+}

@@ -1,3 +1,9 @@
+---
+title: "测试数学公式"
+date: 2026-03-11
+math:
+  enable: true
+---
 # CoNi-MPC: Cooperative Non-inertial Frame Based Model Predictive Control
 
 [CoNi-MPC: Cooperative Non-inertial Frame Based Model Predictive Control](https://arxiv.org/abs/2306.11259)
@@ -22,7 +28,7 @@
 - MPC控制器作为一个统一的框架支持多种无人机-目标交互的任务。无需频繁的重规划。
 
 ![image-20240206000045533](https://s2.loli.net/2024/02/06/OugRhGZycfX3xUC.png)
-
+<!--more-->
 # 相关工作
 
 其他工作需要全局状态估计和频繁的全局路径重规划，本文的方法可避免这两项

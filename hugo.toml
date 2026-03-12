@@ -3,3 +3,74 @@ languageCode = 'en-us'
 title = '求学之路|Left4Learning'
 theme = "DoIt"
 
+[author]
+  name = "Yansong Chen"  # 必填：你的花名或真名（如 "李雷" 或 "Li Lei"）
+  link = "https://github.com/你的GitHubID"  # 选填：点击你的名字时跳转的链接
+  email = "你的邮箱@example.com"  # 选填：你的联系邮箱
+  avatar = "/images/avatar.png"  # 选填：你的头像路径（图片需放在 static/images/ 目录下）
+
+[params.math]
+  enable = true    # 开启数学公式渲染
+  copyTex = true   # 开启 Copy-tex（允许访客复制渲染后的公式源码）
+  mhchem = true    # 开启 mhchem（如果你需要写化学方程式，可以开启）
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)'], ['$', '$']]
+        
+[params.home]
+  # [params.home.profile] 是 DoIt 主题配置个人主页的正确位置
+  [params.home.profile]
+    enable = true      # 必须加上这行！这才是 DoIt 开启个人主页模式的正确开关
+    avatarURL = "/images/avatar.png" 
+    title = "你好，我是李雷"           
+    subtitle = "一名专注于 C++ 和 自动驾驶 的开发工程师" 
+    
+    # 开启打字机效果
+    typeit = true
+
+# 【新增】如果你不想在主页看到下面的文章列表，请加上这段
+# [params.home.posts]
+#     enable = false
+
+# 配置社交链接（建议在视觉上移出 home.profile，作为独立的 params 子级）
+[params.social]
+  # 注意：这里只需要填 ID 或 邮箱地址，不要加 https:// 或 mailto:
+  GitHub = "你的GitHubID"           # 例如填 "leilei"，主题会自动生成 https://github.com/leilei
+  Email = "你的邮箱@xxx.com"        # 例如填 "leilei@xxx.com"，主题会自动生成 mailto:leilei@xxx.com
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    identifier = "categories"
+    name = "技术体系" # 显得比“分类”更专业
+    url = "/categories/"
+    weight = 2
+  [[menu.main]]
+    identifier = "tags"
+    name = "技能栈"   # 显得比“标签”更专业
+    url = "/tags/"
+    weight = 3
+  [[menu.main]]
+    identifier = "about"
+    name = "关于我"
+    url = "/about/"
+    weight = 4
+
+
+# [author]
+#   name = "cys" # 必须填，否则版权框不显示
+#   link = "https://github.com/你的GitHubID"
+
+[params.page]
+  # 开启文章底部的版权声明（直接写 HTML 字符串，注意外层是单引号）
+  license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
