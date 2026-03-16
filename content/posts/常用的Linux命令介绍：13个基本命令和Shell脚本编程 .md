@@ -31,8 +31,6 @@ lightgallery: true
 
 <img src="https://s2.loli.net/2024/01/15/dAGUlxNRDM1KtWP.png" alt="Untitled" style="zoom:67%;" />
 
-<!--more-->
-
 ```
 # 文件和目录操作
 ls
@@ -51,6 +49,8 @@ echo
 Shell programming: variables
 Shell programming: for loop
 ```
+
+<!--more-->
 
 # ls
 

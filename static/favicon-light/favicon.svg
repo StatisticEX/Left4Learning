@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><style>
+    #light-icon {
+      display: inline;
+    }
+    #dark-icon {
+      display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #light-icon {
+        display: none;
+      }
+      #dark-icon {
+        display: inline;
+      }
+    }
+  </style><g id="light-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g><g transform="matrix(5,0,0,5,0,0)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200" width="200" height="200"><rect width="200" height="200" fill="url('#gradient')"></rect><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0%" stop-color="#1e2630"></stop><stop offset="100%" stop-color="#2a3644"></stop></linearGradient></defs><g><g fill="#dce2e8" transform="matrix(4.52596685082873,0,0,4.52596685082873,23.1466613510037,132.17899978015964)" stroke="#5c838f" stroke-width="0.2"><path d="M4.50-14.22L4.50-2.64L10.47-2.64L10.47 0L1.07 0L1.07-14.22L4.50-14.22ZM20.40-14.22L20.40-5.56L21.85-5.56L21.85-3.02L20.40-3.02L20.40 0L17.11 0L17.11-3.02L11.61-3.02L11.42-5.03L17.11-14.19L17.11-14.22L20.40-14.22ZM16.90-9.60L14.55-5.56L17.11-5.56L17.11-9.93L16.90-9.60ZM26.92-14.22L26.92-2.64L32.89-2.64L32.89 0L23.50 0L23.50-14.22L26.92-14.22Z"></path></g></g></svg></g></g></svg></g><g id="dark-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g><g transform="matrix(5,0,0,5,0,0)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200" width="200" height="200"><rect width="200" height="200" fill="url('#gradient')"></rect><defs><linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0%" stop-color="#f4f6f8"></stop><stop offset="100%" stop-color="#e5eaef"></stop></linearGradient></defs><g><g fill="#344152" transform="matrix(4.52596685082873,0,0,4.52596685082873,23.1466613510037,132.17899978015964)" stroke="#8ba3b5" stroke-width="0.2"><path d="M4.50-14.22L4.50-2.64L10.47-2.64L10.47 0L1.07 0L1.07-14.22L4.50-14.22ZM20.40-14.22L20.40-5.56L21.85-5.56L21.85-3.02L20.40-3.02L20.40 0L17.11 0L17.11-3.02L11.61-3.02L11.42-5.03L17.11-14.19L17.11-14.22L20.40-14.22ZM16.90-9.60L14.55-5.56L17.11-5.56L17.11-9.93L16.90-9.60ZM26.92-14.22L26.92-2.64L32.89-2.64L32.89 0L23.50 0L23.50-14.22L26.92-14.22Z"></path></g></g></svg></g></g></svg></g></svg>

@@ -1,0 +1,68 @@
+[social]
+  GitHubithub = "StatisticEX"
+  Email = "873353671@qq.com"
+
+[page]
+  # 开启文章底部的版权声明（直接写 HTML 字符串，注意外层是单引号）
+  license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
+  [page.math]
+    enable = true
+    blockLeftDelimiter = '\['
+    blockRightDelimiter = '\]'
+    inlineLeftDelimiter = '\('
+    inlineRightDelimiter = '\)'
+    copyTex = true
+    mhchem = true
+
+        
+[home]
+  # [params.home.profile] 是 DoIt 主题配置个人主页的正确位置
+  [home.profile]
+    enable = true      # 必须加上这行！这才是 DoIt 开启个人主页模式的正确开关
+    avatarURL = "/images/avatar.png" 
+    title = "你好，我是Yansong Chen"           
+    subtitle = "一名自动驾驶算法工程师" 
+    
+    # 开启打字机效果
+    typeit = true
+
+[ibruce]
+  enable = true       # 开启不蒜子全局统计
+  enablePost = true   # 开启单篇文章阅读量统计
+
+[page.toc]
+  enable = true      # 启用目录
+  keepStatic = false # false 表示目录会随页面滚动悬浮在侧边
+  auto = false       # false 表示默认展开，true 表示默认折叠
+
+[search]
+  enable = true
+  # 搜索引擎的类型 ("algolia", "fuse")
+  type = "fuse"
+  # 文章内容最长索引长度
+  contentLength = 4000
+  # 搜索框的占位提示语
+  placeholder = ""
+  #  最大结果数目
+  maxResultLength = 10
+  #  结果内容片段长度
+  snippetLength = 50
+  #  搜索结果中高亮部分的 HTML 标签
+  highlightTag = "em"
+  #  是否在搜索索引中使用基于 baseURL 的绝对路径
+  absoluteURL = false
+  [search.algolia]
+    index = ""
+    appID = ""
+    searchKey = ""
+  [search.fuse]
+    #  https://fusejs.io/api/options.html
+    isCaseSensitive = false
+    minMatchCharLength = 2
+    findAllMatches = false
+    location = 0
+    threshold = 0.3
+    distance = 100
+    ignoreLocation = false
+    useExtendedSearch = false
+    ignoreFieldNorm = false
