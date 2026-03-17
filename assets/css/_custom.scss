@@ -19,6 +19,95 @@
     /* padding-left: 2em !important; */
 }
 
+/* 5. 主页文章预览样式优化 */
+/* 文章卡片化设计 - 使用浅色半透明矩形包裹 */
+.home[posts] .summary {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-radius: 12px !important;
+    padding: 1.5rem 1.8rem !important;
+    margin-bottom: 1.5rem !important;
+    border-bottom: none !important; /* 移除原来的虚线分隔 */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* 深色模式下的卡片样式 */
+[theme="dark"] .home[posts] .summary {
+    background: rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* hover 效果 - 提升交互体验 */
+.home[posts] .summary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+[theme="dark"] .home[posts] .summary:hover {
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.06) !important;
+}
+
+/* 增大文章标题 */
+.home[posts] .summary .single-title {
+    font-size: 1.65rem !important;
+    font-weight: 600 !important;
+}
+
+/* 缩小正文预览中的一级标题 */
+.home[posts] .summary .content h1 {
+    font-size: 1.35rem !important;
+}
+
+/* 主页预览中的标题统一左对齐，取消缩进 */
+.home[posts] .summary .content h1,
+.home[posts] .summary .content h2,
+.home[posts] .summary .content h3,
+.home[posts] .summary .content h4,
+.home[posts] .summary .content h5,
+.home[posts] .summary .content h6 {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+/* 主页预览中的列表统一左对齐，取消缩进 */
+.home[posts] .summary .content ul,
+.home[posts] .summary .content ol {
+    margin-left: 0 !important;
+    padding-left: 1.2em !important;
+}
+
+/* 主页预览中的链接样式 - 与正文保持一致 */
+.home[posts] .summary .content a {
+    color: var(--single-link-color) !important;
+    text-decoration: none !important;
+    word-break: break-all !important;
+    transition: color 0.3s !important;
+}
+
+.home[posts] .summary .content a:hover {
+    color: var(--single-link-hover-color) !important;
+    text-decoration: underline !important;
+}
+
+.home[posts] .summary .content a b,
+.home[posts] .summary .content a strong {
+    color: var(--single-link-color) !important;
+}
+
+.home[posts] .summary .content a:hover b,
+.home[posts] .summary .content a:hover strong {
+    color: var(--single-link-hover-color) !important;
+}
+
+/* 主页预览中的图片大小限制 */
+.home[posts] .summary .content img {
+    max-width: 100% !important;
+    max-height: 400px !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0.5rem auto !important;
+}
+
 /* 3. 调整 header 中 logo 图片的垂直对齐，使文字位置相对降低 */
 .header-title a img {
     vertical-align: middle !important;
@@ -85,6 +174,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* 浅色模式下的卡片样式 */
+[theme="light"] .profile-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 深色模式下的卡片样式 */
+[theme="dark"] .profile-card {
+    background: rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05) !important;
 }
 
 .profile-avatar {
@@ -235,6 +336,18 @@
     padding: 1.2rem;
     margin-bottom: 1.2rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 浅色模式下的侧边栏样式 */
+[theme="light"] .sidebar-widget {
+    background: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 深色模式下的侧边栏样式 */
+[theme="dark"] .sidebar-widget {
+    background: rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05) !important;
 }
 
 .widget-title {

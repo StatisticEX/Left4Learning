@@ -132,6 +132,27 @@
                 <span class="stat-label">次</span>
             </div>
             {{- end -}}
+
+            {{- /* 文章数统计 */ -}}
+            {{- $posts := where .Site.RegularPages "Type" "posts" -}}
+            <div class="stat-item">
+                <span class="stat-icon">{{ partial "plugin/fontawesome.html" (dict "Style" "solid" "Icon" "book") }}</span>
+                <span class="stat-label">文章</span>
+                <span class="stat-value">{{ len $posts }}</span>
+                <span class="stat-label">篇</span>
+            </div>
+
+            {{- /* 总字数统计 */ -}}
+            {{- $totalWords := 0 -}}
+            {{- range $posts -}}
+                {{- $totalWords = add $totalWords .WordCount -}}
+            {{- end -}}
+            <div class="stat-item">
+                <span class="stat-icon">{{ partial "plugin/fontawesome.html" (dict "Style" "solid" "Icon" "file-alt") }}</span>
+                <span class="stat-label">总计</span>
+                <span class="stat-value">{{ $totalWords }}</span>
+                <span class="stat-label">字</span>
+            </div>
         </div>
     </div>
 </aside>
