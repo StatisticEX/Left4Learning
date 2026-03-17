@@ -133,28 +133,88 @@
     }
 }
 
-/* 小平板：只保留左侧个人信息和主内容 */
-@media (max-width: 1024px) {
+/* 小平板：调整为两栏布局 + 底部侧边栏 */
+@media (max-width: 1024px) and (min-width: 769px) {
     .home-container-three-col {
+        /* 使用两栏布局：左侧边栏 + 主内容 */
         grid-template-columns: 200px 1fr;
+        grid-template-rows: auto auto;
         gap: 1.5rem;
     }
 
-    .home-container-three-col .sidebar {
-        display: none;
+    /* 左侧边栏占据第一列 */
+    .sidebar-left {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    /* 主内容占据第二列 */
+    .main-content {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    /* 右侧边栏跨越两列，显示在底部 */
+    .sidebar {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        position: static;
+        display: block;
+        max-width: 100%;
+    }
+
+    /* 右侧边栏的小部件采用两栏布局 */
+    .sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+    }
+
+    .sidebar-widget {
+        margin-bottom: 0;
     }
 }
 
-/* 移动设备：单栏布局 */
+/* 移动设备：单栏垂直布局 */
 @media (max-width: 768px) {
     .home-container-three-col {
-        grid-template-columns: 1fr !important;
-        gap: 1rem;
+        /* 使用单栏布局，所有内容垂直堆叠 */
+        display: flex !important;
+        flex-direction: column;
+        gap: 1.5rem;
         padding: 0 0.5rem;
     }
 
+    /* 左侧边栏：取消粘性定位，显示在顶部 */
     .sidebar-left {
-        position: static;
+        position: static !important;
+        width: 100%;
+        order: 1; /* 显示在最上面 */
+    }
+
+    /* 主内容区域：文章列表 */
+    .main-content {
+        width: 100%;
+        order: 2; /* 显示在中间 */
+    }
+
+    /* 右侧边栏：显示在底部 */
+    .sidebar {
+        display: block !important;
+        position: static !important;
+        width: 100%;
+        order: 3; /* 显示在最下面 */
+    }
+
+    /* 移动端优化：减小卡片内边距 */
+    .profile-card,
+    .sidebar-widget {
+        padding: 1rem;
+    }
+
+    /* 移动端优化：文章卡片内边距 */
+    .home[posts] .summary {
+        padding: 1rem 1.2rem !important;
     }
 }
 
