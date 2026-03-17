@@ -1,0 +1,550 @@
+{{- define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end -}}
+
+{{- define "content" -}}
+<div class="page single special">
+    <h1 class="single-title animate__animated animate__pulse animate__faster">
+        {{ .Title }}
+    </h1>
+
+    <div class="content" id="content">
+        {{ .Content }}
+
+        {{- /* 数据源说明 */ -}}
+        <div class="stats-info">
+            <p id="data-source-info">
+                <strong>📊 数据来源：</strong>
+                <span id="data-source-text">正在加载...</span>
+            </p>
+        </div>
+    </div>
+
+    {{- /* Stats Container */ -}}
+    <div class="stats-container">
+        {{- /* 年度/月度发布热力图 */ -}}
+        <div class="stats-section">
+            <h2>📅 文章发布趋势</h2>
+            <div id="heatmap-chart" style="width: 100%; height: 400px;"></div>
+        </div>
+
+        {{- /* 分类与标签分布 */ -}}
+        <div class="stats-section">
+            <h2>🏷️ 分类与标签分布</h2>
+            <div class="stats-grid">
+                <div id="category-chart" style="width: 100%; height: 400px;"></div>
+                <div id="tag-cloud" style="width: 100%; height: 400px;"></div>
+            </div>
+        </div>
+
+        {{- /* 近30天访问趋势 */ -}}
+        <div class="stats-section">
+            <h2>📈 近30天访问趋势</h2>
+            <div id="trend-chart" style="width: 100%; height: 400px;"></div>
+            <p class="chart-note">* 如显示模拟数据，请配置 Cloudflare Analytics 以查看真实数据</p>
+        </div>
+
+        {{- /* 访客地域分布 */ -}}
+        <div class="stats-section">
+            <h2>🌍 访客地域分布</h2>
+            <div id="geo-chart" style="width: 100%; height: 500px;"></div>
+        </div>
+
+        {{- /* 来源渠道占比分布 */ -}}
+        <div class="stats-section">
+            <h2>📊 来源渠道占比</h2>
+            <div id="source-chart" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+</div>
+
+{{- /* Load ECharts */ -}}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+
+<script>
+// 配置
+const CONFIG = {
+    // API 端点 - 如果配置了 Cloudflare Worker，使用真实数据
+    apiEndpoint: '/api/analytics',  // 或者 'https://your-worker.workers.dev'
+    useRealData: false  // 是否尝试获取真实数据
+};
+
+// 全局图表实例
+const charts = {};
+
+// 初始化
+document.addEventListener('DOMContentLoaded', async function() {
+    const theme = getTheme();
+
+    // 获取所有文章（用于本地统计）
+    const posts = {{ .Site.RegularPages }};
+
+    // 尝试获取真实的 Cloudflare Analytics 数据
+    let realData = null;
+    if (CONFIG.useRealData) {
+        try {
+            realData = await fetchAnalyticsData();
+            updateDataSourceInfo('Cloudflare Analytics（真实数据）');
+        } catch (error) {
+            console.warn('无法获取 Cloudflare Analytics 数据，使用模拟数据:', error);
+            updateDataSourceInfo('模拟数据（请配置 Cloudflare Analytics 查看真实数据）');
+        }
+    } else {
+        updateDataSourceInfo('本地统计 + 模拟数据');
+    }
+
+    // 初始化所有图表
+    initHeatmap(posts, theme);
+    initCategoryChart(posts, theme);
+    initTagCloud(posts, theme);
+
+    if (realData) {
+        initTrendChartReal(realData.pageviews, theme);
+        initGeoChartReal(realData.countries, theme);
+        initSourceChartReal(realData.referrers, theme);
+    } else {
+        initTrendChart(theme);
+        initGeoChart(theme);
+        initSourceChart(theme);
+    }
+
+    // 监听主题切换
+    observeThemeChange();
+
+    // 窗口大小变化时重新渲染
+    window.addEventListener('resize', () => {
+        Object.values(charts).forEach(chart => chart.resize());
+    });
+});
+
+// 获取主题
+function getTheme() {
+    return document.body.getAttribute('theme') === 'dark' ? 'dark' : 'light';
+}
+
+// 更新数据源说明
+function updateDataSourceInfo(text) {
+    const el = document.getElementById('data-source-text');
+    if (el) el.textContent = text;
+}
+
+// 获取 Cloudflare Analytics 数据
+async function fetchAnalyticsData() {
+    const [pageviews, countries, referrers] = await Promise.all([
+        fetch(`${CONFIG.apiEndpoint}/pageviews`).then(r => r.json()),
+        fetch(`${CONFIG.apiEndpoint}/countries`).then(r => r.json()),
+        fetch(`${CONFIG.apiEndpoint}/referrers`).then(r => r.json())
+    ]);
+
+    return { pageviews, countries, referrers };
+}
+
+// 文章发布热力图
+function initHeatmap(posts, theme) {
+    const chart = echarts.init(document.getElementById('heatmap-chart'), theme);
+    charts.heatmap = chart;
+
+    const monthlyData = {};
+    posts.forEach(post => {
+        if (post.Date) {
+            const date = new Date(post.Date);
+            const yearMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+            monthlyData[yearMonth] = (monthlyData[yearMonth] || 0) + 1;
+        }
+    });
+
+    const now = new Date();
+    const data = [];
+    const months = [];
+
+    for (let i = 11; i >= 0; i--) {
+        const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        const yearMonth = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+        months.push(yearMonth);
+        data.push(monthlyData[yearMonth] || 0);
+    }
+
+    chart.setOption({
+        title: { text: '文章发布趋势（近12个月）', left: 'center' },
+        tooltip: {
+            trigger: 'axis',
+            formatter: '{b}<br/>发布文章: {c} 篇'
+        },
+        xAxis: {
+            type: 'category',
+            data: months,
+            axisLabel: { rotate: 45 }
+        },
+        yAxis: {
+            type: 'value',
+            name: '文章数',
+            minInterval: 1
+        },
+        series: [{
+            data: data,
+            type: 'bar',
+            itemStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    { offset: 0, color: '#83bff6' },
+                    { offset: 1, color: '#188df0' }
+                ])
+            },
+            emphasis: {
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: '#2378f7' },
+                        { offset: 1, color: '#83bff6' }
+                    ])
+                }
+            }
+        }]
+    });
+}
+
+// 分类分布饼图
+function initCategoryChart(posts, theme) {
+    const chart = echarts.init(document.getElementById('category-chart'), theme);
+    charts.category = chart;
+
+    const categories = {};
+    posts.forEach(post => {
+        if (post.Params && post.Params.categories) {
+            post.Params.categories.forEach(cat => {
+                categories[cat] = (categories[cat] || 0) + 1;
+            });
+        }
+    });
+
+    const data = Object.entries(categories)
+        .map(([name, value]) => ({ name, value }))
+        .sort((a, b) => b.value - a.value);
+
+    chart.setOption({
+        title: { text: '分类分布', left: 'center' },
+        tooltip: { trigger: 'item', formatter: '{b}: {c} 篇 ({d}%)' },
+        series: [{
+            type: 'pie',
+            radius: ['40%', '70%'],
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: theme === 'dark' ? '#1a1a1a' : '#fff',
+                borderWidth: 2
+            },
+            label: { formatter: '{b}: {c} ({d}%)' },
+            data: data.length > 0 ? data : [{ name: '暂无分类', value: 1 }]
+        }]
+    });
+}
+
+// 标签词云
+function initTagCloud(posts, theme) {
+    const chart = echarts.init(document.getElementById('tag-cloud'), theme);
+    charts.tagCloud = chart;
+
+    const tags = {};
+    posts.forEach(post => {
+        if (post.Params && post.Params.tags) {
+            post.Params.tags.forEach(tag => {
+                tags[tag] = (tags[tag] || 0) + 1;
+            });
+        }
+    });
+
+    const data = Object.entries(tags).map(([name, value]) => ({
+        name,
+        value: value * 10,  // 放大权重以便显示
+        textStyle: {
+            color: undefined  // 让 ECharts 自动分配颜色
+        }
+    }));
+
+    chart.setOption({
+        title: { text: '标签云', left: 'center' },
+        tooltip: { formatter: '{b}: {c} 篇文章' },
+        series: [{
+            type: 'wordCloud',
+            shape: 'circle',
+            left: 'center',
+            top: 'center',
+            width: '90%',
+            height: '80%',
+            sizeRange: [14, 60],
+            rotationRange: [-45, 45],
+            rotationStep: 45,
+            gridSize: 8,
+            drawOutOfBound: false,
+            layoutAnimation: true,
+            textStyle: {
+                fontFamily: 'Arial, sans-serif',
+                fontWeight: 'bold'
+            },
+            emphasis: {
+                textStyle: {
+                    shadowBlur: 10,
+                    shadowColor: theme === 'dark' ? '#fff' : '#333'
+                }
+            },
+            data: data.length > 0 ? data : [{ name: '暂无标签', value: 100 }]
+        }]
+    });
+}
+
+// 近30天访问趋势（真实数据）
+function initTrendChartReal(data, theme) {
+    const chart = echarts.init(document.getElementById('trend-chart'), theme);
+    charts.trend = chart;
+
+    chart.setOption({
+        title: { text: '近30天访问趋势（真实数据）', left: 'center' },
+        tooltip: { trigger: 'axis' },
+        legend: { data: ['页面浏览量', '独立访客'], top: 30 },
+        grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: data.dates
+        },
+        yAxis: { type: 'value' },
+        series: [
+            {
+                name: '页面浏览量',
+                type: 'line',
+                smooth: true,
+                data: data.pageviews,
+                itemStyle: { color: '#5470c6' },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: 'rgba(84, 112, 198, 0.5)' },
+                        { offset: 1, color: 'rgba(84, 112, 198, 0.1)' }
+                    ])
+                }
+            },
+            {
+                name: '独立访客',
+                type: 'line',
+                smooth: true,
+                data: data.visitors,
+                itemStyle: { color: '#91cc75' },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: 'rgba(145, 204, 117, 0.5)' },
+                        { offset: 1, color: 'rgba(145, 204, 117, 0.1)' }
+                    ])
+                }
+            }
+        ]
+    });
+}
+
+// 近30天访问趋势（模拟数据）
+function initTrendChart(theme) {
+    const chart = echarts.init(document.getElementById('trend-chart'), theme);
+    charts.trend = chart;
+
+    const dates = [];
+    const pageviews = [];
+    const visitors = [];
+
+    for (let i = 29; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        dates.push(`${d.getMonth() + 1}-${d.getDate()}`);
+        pageviews.push(Math.floor(Math.random() * 200) + 50);
+        visitors.push(Math.floor(Math.random() * 100) + 20);
+    }
+
+    initTrendChartReal({ dates, pageviews, visitors }, theme);
+
+    // 更新标题显示为模拟数据
+    chart.setOption({
+        title: { text: '近30天访问趋势（模拟数据）' }
+    });
+}
+
+// 地域分布（真实数据）
+function initGeoChartReal(data, theme) {
+    const chart = echarts.init(document.getElementById('geo-chart'), theme);
+    charts.geo = chart;
+
+    chart.setOption({
+        title: { text: '访客地域分布 TOP 10（真实数据）', left: 'center' },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { type: 'shadow' }
+        },
+        grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+        xAxis: {
+            type: 'value',
+            name: '访客数'
+        },
+        yAxis: {
+            type: 'category',
+            data: data.countries.map(c => c.name).reverse(),
+            axisLabel: { interval: 0 }
+        },
+        series: [{
+            type: 'bar',
+            data: data.countries.map(c => c.value).reverse(),
+            itemStyle: {
+                color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+                    { offset: 0, color: '#83bff6' },
+                    { offset: 1, color: '#188df0' }
+                ])
+            }
+        }]
+    });
+}
+
+// 地域分布（模拟数据）
+function initGeoChart(theme) {
+    const mockCountries = [
+        { name: '中国', value: Math.floor(Math.random() * 500) + 100 },
+        { name: '美国', value: Math.floor(Math.random() * 300) + 50 },
+        { name: '日本', value: Math.floor(Math.random() * 200) + 30 },
+        { name: '英国', value: Math.floor(Math.random() * 150) + 20 },
+        { name: '德国', value: Math.floor(Math.random() * 150) + 20 },
+        { name: '法国', value: Math.floor(Math.random() * 100) + 15 },
+        { name: '加拿大', value: Math.floor(Math.random() * 100) + 15 },
+        { name: '澳大利亚', value: Math.floor(Math.random() * 80) + 10 },
+        { name: '韩国', value: Math.floor(Math.random() * 80) + 10 },
+        { name: '新加坡', value: Math.floor(Math.random() * 60) + 10 }
+    ].sort((a, b) => b.value - a.value);
+
+    initGeoChartReal({ countries: mockCountries }, theme);
+
+    const chart = charts.geo;
+    chart.setOption({
+        title: { text: '访客地域分布 TOP 10（模拟数据）' }
+    });
+}
+
+// 来源渠道（真实数据）
+function initSourceChartReal(data, theme) {
+    const chart = echarts.init(document.getElementById('source-chart'), theme);
+    charts.source = chart;
+
+    chart.setOption({
+        title: { text: '来源渠道占比（真实数据）', left: 'center' },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{b}: {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            top: 'middle'
+        },
+        series: [{
+            type: 'pie',
+            radius: '60%',
+            center: ['60%', '50%'],
+            data: data.referrers,
+            label: { formatter: '{b}: {d}%' },
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }]
+    });
+}
+
+// 来源渠道（模拟数据）
+function initSourceChart(theme) {
+    const mockReferrers = [
+        { name: '直接访问', value: 335 },
+        { name: '搜索引擎', value: 310 },
+        { name: '社交媒体', value: 234 },
+        { name: '外部链接', value: 135 },
+        { name: 'RSS订阅', value: 120 },
+        { name: '其他', value: 80 }
+    ];
+
+    initSourceChartReal({ referrers: mockReferrers }, theme);
+
+    const chart = charts.source;
+    chart.setOption({
+        title: { text: '来源渠道占比（模拟数据）' }
+    });
+}
+
+// 监听主题切换
+function observeThemeChange() {
+    const observer = new MutationObserver(() => {
+        const newTheme = getTheme();
+        // 重新初始化所有图表
+        Object.keys(charts).forEach(key => {
+            if (charts[key]) {
+                charts[key].dispose();
+            }
+        });
+
+        // 重新加载数据
+        location.reload();
+    });
+
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['theme', 'class']
+    });
+}
+</script>
+
+<style>
+.stats-container {
+    margin-top: 2rem;
+}
+
+.stats-info {
+    padding: 1rem;
+    margin: 1rem 0;
+    background: var(--code-background);
+    border-radius: 8px;
+    border-left: 4px solid var(--global-link-color);
+}
+
+.stats-info p {
+    margin: 0;
+    color: var(--global-font-color);
+}
+
+.stats-section {
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stats-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: var(--global-font-color);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+}
+
+.chart-note {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--global-font-secondary-color);
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-section {
+        padding: 1rem;
+    }
+}
+</style>
+
+{{- end -}}
