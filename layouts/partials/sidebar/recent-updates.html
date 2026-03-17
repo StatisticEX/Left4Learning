@@ -1,0 +1,42 @@
+{{- /* 侧边栏：最近更新的文章 */ -}}
+<aside class="sidebar">
+    <div class="sidebar-widget recent-updates">
+        <h3 class="widget-title">最近更新</h3>
+        <ul class="recent-posts-list">
+            {{- /* 获取最近更新的文章（按修改时间排序） */ -}}
+            {{- range first 5 (where .Site.RegularPages "Section" "in" (slice "posts" "post" "blog")) -}}
+                <li class="recent-post-item">
+                    <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+                        <div class="post-title">{{ .Title }}</div>
+                        <div class="post-meta">
+                            {{- /* 显示最后修改时间 */ -}}
+                            {{- if .Lastmod -}}
+                                <time datetime="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+                                    {{ .Lastmod.Format "2006-01-02" }}
+                                </time>
+                            {{- else if .Date -}}
+                                <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+                                    {{ .Date.Format "2006-01-02" }}
+                                </time>
+                            {{- end -}}
+                        </div>
+                    </a>
+                </li>
+            {{- end -}}
+        </ul>
+    </div>
+
+    {{- /* 可选：添加标签云 */ -}}
+    {{- if .Site.Taxonomies.tags -}}
+    <div class="sidebar-widget tags-widget">
+        <h3 class="widget-title">标签</h3>
+        <div class="tag-cloud">
+            {{- range first 15 .Site.Taxonomies.tags.ByCount -}}
+                <a href="{{ .Page.RelPermalink }}" class="tag-link" title="{{ .Page.Title }}">
+                    {{ .Page.Title }} <span class="tag-count">({{ .Count }})</span>
+                </a>
+            {{- end -}}
+        </div>
+    </div>
+    {{- end -}}
+</aside>

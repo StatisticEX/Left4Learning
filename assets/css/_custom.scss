@@ -22,10 +22,302 @@
 /* 3. 调整 header 中 logo 图片的垂直对齐，使文字位置相对降低 */
 .header-title a img {
     vertical-align: middle !important;
-    /* 可以微调这个值来精确控制位置：
-       - 使用 text-bottom 会让图片对齐文本底部（文字偏高）
-       - 使用 middle 会让图片居中对齐（文字适中）
-       - 使用 baseline 会让图片底部对齐基线（文字偏低）
-       - 也可以用具体数值如 -2px, -4px 等负值让图片上移（文字下降） */
-    margin-top: -2px; /* 微调：让图片再上移 2px，文字相对下降 */
+    margin-top: -2px;
+}
+
+/* 4. 主页三栏布局 - 左侧个人信息 + 中间文章列表 + 右侧最近更新 */
+.home-container-three-col {
+    display: grid;
+    grid-template-columns: 260px 1fr 280px;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* 响应式设计 */
+/* 平板：左右侧边栏缩小 */
+@media (max-width: 1280px) {
+    .home-container-three-col {
+        grid-template-columns: 220px 1fr 260px;
+        gap: 1.5rem;
+    }
+}
+
+/* 小平板：只保留左侧个人信息和主内容 */
+@media (max-width: 1024px) {
+    .home-container-three-col {
+        grid-template-columns: 200px 1fr;
+        gap: 1.5rem;
+    }
+
+    .home-container-three-col .sidebar {
+        display: none;
+    }
+}
+
+/* 移动设备：单栏布局 */
+@media (max-width: 768px) {
+    .home-container-three-col {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .sidebar-left {
+        position: static;
+    }
+}
+
+/* ===== 左侧侧边栏 - 个人信息卡片 ===== */
+.sidebar-left {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+}
+
+.profile-card {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 1.5rem 1.2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-avatar {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.profile-avatar img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 3px solid var(--global-border-color);
+    transition: transform 0.3s;
+    display: block;
+}
+
+.profile-avatar a:hover img {
+    transform: scale(1.05);
+}
+
+.profile-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 0.4rem 0;
+    color: var(--global-font-color);
+    line-height: 1.3;
+}
+
+.profile-subtitle {
+    font-size: 0.9rem;
+    color: var(--global-font-secondary-color);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    height: 3rem; /* 固定高度，完全避免打字机效果时的跳动 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 确保typeit容器也不影响高度 */
+.profile-subtitle .typeit {
+    width: 100%;
+    text-align: center;
+}
+
+.profile-social {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--global-border-color);
+}
+
+.profile-social a {
+    font-size: 1.3rem;
+    color: var(--global-font-secondary-color);
+    transition: all 0.3s;
+}
+
+.profile-social a:hover {
+    color: var(--global-link-hover-color);
+    transform: translateY(-2px);
+}
+
+.profile-disclaimer {
+    font-size: 0.85rem;
+    color: var(--global-font-secondary-color);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--global-border-color);
+    line-height: 1.4;
+}
+
+/* 网站统计信息 */
+.profile-stats {
+    width: 100%;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--global-border-color);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--global-font-secondary-color);
+}
+
+.stat-item:last-child {
+    margin-bottom: 0;
+}
+
+.stat-icon {
+    color: var(--global-link-color);
+    font-size: 0.95rem;
+}
+
+.stat-label {
+    color: var(--global-font-secondary-color);
+}
+
+.stat-value {
+    color: var(--global-font-color);
+    font-weight: 600;
+}
+
+/* 隐藏页面底部的访问量统计（已在侧边栏显示） */
+.footer #busuanzi_container_site_pv,
+.footer-line #busuanzi_container_site_pv,
+.footer .post-meta-item {
+    display: none !important;
+}
+
+/* 确保footer不会有多余的空行 */
+.footer .footer-line:empty {
+    display: none;
+}
+
+/* ===== 主内容区域 ===== */
+.main-content {
+    min-width: 0;
+}
+
+/* 确保文章卡片有合适的样式 */
+.main-content .page.home {
+    width: 100%;
+}
+
+/* ===== 右侧侧边栏 - 最近更新 ===== */
+.sidebar {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+}
+
+.sidebar-widget {
+    background: var(--card-background);
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.widget-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.8rem 0;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--global-border-color);
+    color: var(--global-font-color);
+}
+
+/* 最近更新文章列表 */
+.recent-posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recent-post-item {
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--global-border-color);
+}
+
+.recent-post-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.recent-post-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.recent-post-item a:hover .post-title {
+    color: var(--global-link-hover-color);
+}
+
+.recent-post-item .post-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0.25rem;
+    color: var(--global-font-color);
+    transition: color 0.3s;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.recent-post-item .post-meta {
+    font-size: 0.8rem;
+    color: var(--global-font-secondary-color);
+}
+
+/* 标签云 */
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-link {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    background: var(--tag-background-color);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: var(--global-font-color);
+    transition: all 0.3s;
+}
+
+.tag-link:hover {
+    background: var(--global-link-hover-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.tag-count {
+    opacity: 0.7;
+    font-size: 0.8em;
 }

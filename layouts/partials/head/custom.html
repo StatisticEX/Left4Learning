@@ -4,3 +4,13 @@
 <!-- 深色模式下的图标 -->
 <!-- <link rel="icon" type="image/png" href="/favicon-dark/favicon-96x96.png" media="(prefers-color-scheme: dark)"> -->
 
+<!-- 主题自动切换头像和logo的脚本 -->
+{{ $themeSwitcher := resources.Get "js/theme-switcher.js" }}
+{{ if $themeSwitcher }}
+<script src="{{ $themeSwitcher.RelPermalink }}"></script>
+{{ end }}
+
+<!-- 不蒜子统计脚本 -->
+{{- if eq .Site.Params.ibruce.enable true -}}
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+{{- end -}}

@@ -1,0 +1,48 @@
+{{- define "title" }}
+    {{- $paginatorPager := .Scratch.Get "paginatorPager" -}}
+    {{- if and $paginatorPager (gt $paginatorPager.PageNumber 1) -}}
+        {{- T "prefixPageNumber" }} {{ $paginatorPager.PageNumber }} {{ T "suffixPageNumber" }} - {{ $.Site.Title -}}
+    {{ else }}
+        {{- $.Site.Title -}}
+    {{- end -}}
+{{- end -}}
+
+{{- define "content" -}}
+    {{- $params := .Scratch.Get "params" -}}
+    {{- $profile := .Site.Params.home.profile -}}
+    {{- $posts := .Site.Params.home.posts -}}
+
+    <div class="home-container-three-col">
+        {{- /* Left Sidebar - Profile */ -}}
+        {{- if ne $profile.enable false -}}
+            {{- partial "sidebar/left-profile.html" . -}}
+        {{- end -}}
+
+        {{- /* Main Content - Posts */ -}}
+        <div class="main-content">
+            <div class="page home"{{ if ne $posts.enable false | or .Content }} posts{{ end }}>
+                {{- /* Content */ -}}
+                {{- if .Content -}}
+                    <div class="single">
+                        <div class="content" id="content">
+                            {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+                        </div>
+                    </div>
+                {{- end -}}
+
+                {{- /* Posts */ -}}
+                {{- if ne $posts.enable false | and .Site.RegularPages -}}
+                    {{- /* Paginate */ -}}
+                    {{- /* Paginate is first call on baseof.html */ -}}
+                    {{- range .Paginator.Pages -}}
+                        {{- .Render "summary" -}}
+                    {{- end -}}
+                    {{- partial "paginator.html" . -}}
+                {{- end -}}
+            </div>
+        </div>
+
+        {{- /* Right Sidebar - Recent Updates */ -}}
+        {{- partial "sidebar/recent-updates.html" . -}}
+    </div>
+{{- end -}}
