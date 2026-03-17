@@ -25,8 +25,6 @@ math:
 lightgallery: true
 ---
 
-[TOC]
-
 *由于本书的翻译腔有点佶屈聱牙，从这一章开始lz会增加转述程度使得文本更流畅*
 
 # 条款05：了解C++默默编写并调用哪些函数（Know what functions C++ silently writes and calls）

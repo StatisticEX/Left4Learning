@@ -25,8 +25,6 @@ math:
 lightgallery: true
 ---
 
-[TOC]
-
 # 条款32：确定你的public继承塑模出is-a关系（Make sure public inheritance models “is-a”）
 
 本条款内容比较简单，略写
@@ -805,21 +803,21 @@ pD->mf();  //调用D::mf
 //一个用以描述几何形状的类
 class Shape {
 public:
-	enum ShapeColor { Red, Green, Blue };
+	enum Shape { Red, Green, Blue };
 	//所有形状都必须提供一个函数，用来绘出自己
-	virtual void draw(ShapeColor color = Red) const = 0;
+	virtual void draw(Shape color = Red) const = 0;
 	...
 };
 
 class Rectangle: public Shape {
 public:
 	//赋予不同的缺省参数值，不好！
-	virtual void draw(ShapeColor color = Green) const;
+	virtual void draw(Shape color = Green) const;
 	...
 };
 class Circle: public Shape {
 public:
-	virtual void draw(ShapeColor color) const;
+	virtual void draw(Shape color) const;
 	//注意，以上这么写则当客户以对象调用此函数，一定要指定参数值
 	//因为静态绑定下这个函数并不从其base继承缺省参数值
 	//但若以指针（或引用）调用此函数，可以不指定参数值
@@ -869,14 +867,14 @@ pr->draw();  //调用Rectangle::draw(Shape::Red) !
 ```cpp
 class Shape {
 public:
-	enum ShapeColor { Red, Green, Blue };
- 	virtual void draw(ShapeColor color = Red) const = 0;
+	enum Shape { Red, Green, Blue };
+ 	virtual void draw(Shape color = Red) const = 0;
 	...
 };
 
 class Rectangle: public Shape {
 public:
-	virtual void draw(ShapeColor color = Red) const;
+	virtual void draw(Shape color = Red) const;
 	...
 };
 
@@ -890,20 +888,20 @@ public:
 ```cpp
 class Shape {
 public:
-	enum ShapeColor { Red, Green, Blue };
-	void draw(ShapeColor color = Red) const   
+	enum Shape { Red, Green, Blue };
+	void draw(Shape color = Red) const   
 	{                                                                 
 		doDraw(color);                           
 	}                                                  
 	...                                                 
 private:                                       
-	virtual void doDraw(ShapeColor color) const = 0; 
+	virtual void doDraw(Shape color) const = 0; 
 }; 
 class Rectangle: public Shape {
 public:
 	...
 private:
-	virtual void doDraw(ShapeColor color) const; 
+	virtual void doDraw(Shape color) const; 
 	...                                                               
 };          
 ```

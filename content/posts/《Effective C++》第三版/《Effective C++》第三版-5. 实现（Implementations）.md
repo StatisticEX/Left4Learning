@@ -25,8 +25,6 @@ math:
 lightgallery: true
 ---
 
-[TOC]
-
 # 条款26：尽可能延后变量定义式的出现时间（Postpone variable definitions as long as possible）
 
 **应延后变量的定义，知道不得不使用该变量的前一刻为止，甚至直到能够给他初值实参为止**

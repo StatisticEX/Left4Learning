@@ -1,19 +1,51 @@
 baseURL = 'https://l4l.org/'
 languageCode = 'zh-cn'
-title = '求学之路|Left4Learning'
+# title = '求学之路|Left4Learning'
 theme = "DoIt"
 
-[author]
-  name = "Yansong Chen"  # 必填：你的花名或真名（如 "李雷" 或 "Li Lei"）
-  link = "https://github.com/你的GitHubID"  # 选填：点击你的名字时跳转的链接
-  email = "你的邮箱@example.com"  # 选填：你的联系邮箱
-  avatar = "/images/avatar.png"  # 选填：你的头像路径（图片需放在 static/images/ 目录下）
+# 网站地图配置
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
 
+# Permalinks 配置
+[Permalinks]
+  # posts = ":year/:month/:contentbasename"
+  posts = ":contentbasename"
+
+# 隐私信息配置
+[privacy]
+  # DoIt 删除 | 0.2.0 Google Analytics 相关隐私 (被 params.analytics.google 替代)
+  [privacy.googleAnalytics]
+    # ...
+  [privacy.x]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+# 用于输出 Markdown 格式文档的设置
+[mediaTypes]
+  [mediaTypes."text/plain"]
+    suffixes = ["md"]
+
+# 用于输出 Markdown 格式文档的设置
+[outputFormats.MarkDown]
+  mediaType = "text/plain"
+  isPlainText = true
+  isHTML = false
+
+# 用于 Hugo 输出文档的设置
 [outputs]
+  # DoIt 更改 | 0.2.0
   home = ["HTML", "RSS", "JSON"]
+  page = ["HTML", "MarkDown"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
 
+# 用于分类的设置
 [taxonomies]
-  category = "categories"
-  tag = "tags"
-  series = "series"
-
+author = "authors"
+category = "categories"
+tag = "tags"
+series = "series"

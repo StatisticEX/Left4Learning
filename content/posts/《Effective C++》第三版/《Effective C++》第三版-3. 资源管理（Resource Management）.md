@@ -25,8 +25,6 @@ math:
 lightgallery: true
 ---
 
-[TOC]
-
 *前几章的笔记多有不足，这一章会持续改进*
 
 # 条款13：以对象管理资源（Use objects to manage resources）

@@ -25,8 +25,6 @@ math:
 lightgallery: true
 ---
 
-[TOC]
-
 # 条款01：视C++为一个语言联邦（View C++ as a federation of languages）
 
 C++有4个主要的次语言（sublanguage）：

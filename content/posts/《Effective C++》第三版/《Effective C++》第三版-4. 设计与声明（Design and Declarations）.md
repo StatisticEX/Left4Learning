@@ -25,8 +25,6 @@ math:
 lightgallery: true
 ---
 
-[TOC]
-
 # 条款17：让接口容易被正确使用，不易被误用（Make interfaces easy to use correctly and hard to use incorrectly）
 
 ## 限制类型和值

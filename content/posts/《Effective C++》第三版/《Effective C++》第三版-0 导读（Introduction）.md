@@ -25,8 +25,6 @@ math:
 lightgallery: true
 ---
 
-[TOC]
-
 # 术语（Terminology）
 
 **声明式（declaration）**：告诉编译器某个东西的名称和类型（type），但略去细节

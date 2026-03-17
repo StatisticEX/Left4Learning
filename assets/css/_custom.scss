@@ -12,9 +12,20 @@
 /* 2. 修复列表（枚举）的缩进 */
 .page.single .content ul,
 .page.single .content ol {
-    /* 方案 A：让列表的文字和正文对齐（前面的圆点会稍微凸出去一点，这是排版学上最推荐的“悬挂缩进”） */
-    padding-left: 1.2em !important; 
-    
+    /* 方案 A：让列表的文字和正文对齐（前面的圆点会稍微凸出去一点，这是排版学上最推荐的"悬挂缩进"） */
+    padding-left: 1.2em !important;
+
     /* 方案 B：如果你希望前面的圆点和正文对齐，文字往后缩，可以把上面的 1.2em 改成 2em 左右 */
     /* padding-left: 2em !important; */
+}
+
+/* 3. 调整 header 中 logo 图片的垂直对齐，使文字位置相对降低 */
+.header-title a img {
+    vertical-align: middle !important;
+    /* 可以微调这个值来精确控制位置：
+       - 使用 text-bottom 会让图片对齐文本底部（文字偏高）
+       - 使用 middle 会让图片居中对齐（文字适中）
+       - 使用 baseline 会让图片底部对齐基线（文字偏低）
+       - 也可以用具体数值如 -2px, -4px 等负值让图片上移（文字下降） */
+    margin-top: -2px; /* 微调：让图片再上移 2px，文字相对下降 */
 }
