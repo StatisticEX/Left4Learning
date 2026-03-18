@@ -1,4 +1,4 @@
-baseURL = 'https://l4l.org/'
+baseURL = 'https://left4learning.pages.dev/'
 languageCode = 'zh-cn'
 # title = '求学之路|Left4Learning'
 theme = "DoIt"
