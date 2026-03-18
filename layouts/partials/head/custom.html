@@ -1,16 +1,60 @@
-<!-- 浅色模式下的图标 -->
-<!-- <link rel="icon" type="image/png" href="/favicon-light/favicon-96x96.png" media="(prefers-color-scheme: light)"> -->
+<!-- 安全性优化 -->
+<!-- Referrer Policy: 在保护隐私的同时允许分析工具工作 -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+<!-- 强制使用最新的IE渲染引擎 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 防止XSS攻击 -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
 
-<!-- 深色模式下的图标 -->
-<!-- <link rel="icon" type="image/png" href="/favicon-dark/favicon-96x96.png" media="(prefers-color-scheme: dark)"> -->
+<!-- 国内搜索引擎优化 -->
+<!-- 禁止百度转码 -->
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 百度移动适配声明 -->
+<meta name="applicable-device" content="pc,mobile">
+<!-- 移动优先索引 -->
+<meta name="mobile-agent" content="format=html5; url={{ .Permalink }}">
+<!-- 声明文档格式 -->
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<meta name="format-detection" content="address=no">
+
+<!-- DNS预解析和预连接优化 -->
+<!-- 预连接到CDN和第三方服务 -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+
+<!-- 预加载关键CSS和字体资源 -->
+<link rel="preload" href="/css/main.min.css" as="style">
+<link rel="preload" href="/css/style.min.css" as="style">
+
+<!-- 预获取可能访问的页面（在空闲时加载） -->
+{{- if .IsHome -}}
+<!-- 主页：预取posts和categories页面 -->
+<link rel="prefetch" href="/posts/">
+<link rel="prefetch" href="/categories/">
+{{- end -}}
 
 <!-- 主题自动切换头像和logo的脚本 -->
 {{ $themeSwitcher := resources.Get "js/theme-switcher.js" }}
 {{ if $themeSwitcher }}
-<script src="{{ $themeSwitcher.RelPermalink }}"></script>
+<script defer src="{{ $themeSwitcher.RelPermalink }}"></script>
 {{ end }}
 
 <!-- 不蒜子统计脚本 -->
 {{- if eq .Site.Params.ibruce.enable true -}}
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 {{- end -}}
+
+<!-- 面包屑导航结构化数据 -->
+{{- partial "seo/breadcrumb.html" . -}}
+
+<!-- Core Web Vitals 性能监控 -->
+{{- if .Site.Params.analytics.webVitals.enable -}}
+{{ $webVitals := resources.Get "js/web-vitals-monitor.js" }}
+{{ if $webVitals }}
+<script defer src="{{ $webVitals.RelPermalink }}"></script>
+{{ end }}
+{{- end -}}
+

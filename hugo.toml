@@ -7,7 +7,8 @@ theme = "DoIt"
 [sitemap]
   changefreq = "weekly"
   filename = "sitemap.xml"
-  priority = 0.5
+  # 主页优先级最高
+  priority = 0.8
 
 # Permalinks 配置
 [Permalinks]

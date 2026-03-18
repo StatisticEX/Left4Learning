@@ -1,0 +1,59 @@
+# 国内CDN配置 - 使用字节跳动CDN (npmmirror.com)
+# 备用方案：七牛云CDN
+# 相比jsdelivr更适合国内用户访问
+
+prefix:
+  # 字节跳动NPM镜像源
+  libFiles: https://registry.npmmirror.com/
+  # simple-icons@5.21.1
+  simpleIcons: https://registry.npmmirror.com/simple-icons/5.21.1/files/icons/
+
+libFiles:
+  # algoliasearch@4.11.0
+  algoliasearchJS: algoliasearch/4.11.0/files/dist/algoliasearch.umd.min.js
+  # aplayer@1.10.1
+  aplayerCSS: aplayer/1.10.1/files/dist/APlayer.min.css
+  aplayerJS: aplayer/1.10.1/files/dist/APlayer.min.js
+  # autocomplete.js@0.38.0
+  autocompleteJS: autocomplete.js/0.38.0/files/dist/autocomplete.min.js
+  # cookieconsent@3.1.1
+  cookieconsentCSS: cookieconsent/3.1.1/files/build/cookieconsent.min.css
+  cookieconsentJS: cookieconsent/3.1.1/files/build/cookieconsent.min.js
+  # echarts@5.2.2
+  echartsJS: echarts/5.2.2/files/dist/echarts.min.js
+  echartsMacaronsJS: echarts/5.2.2/files/theme/macarons.min.js
+  # fusejs@6.4.6
+  fuseJS: fuse.js/6.4.6/files/dist/fuse.min.js
+  # gitalk@1.7.2
+  gitalkCSS: gitalk/1.7.2/files/dist/gitalk.min.css
+  gitalkJS: gitalk/1.7.2/files/dist/gitalk.min.js
+  # katex@0.15.1
+  katexCSS: katex/0.15.1/files/dist/katex.min.css
+  katexJS: katex/0.15.1/files/dist/katex.min.js
+  katexAutoRenderJS: katex/0.15.1/files/dist/contrib/auto-render.min.js
+  katexCopyTexCSS: katex/0.15.1/files/dist/contrib/copy-tex.min.css
+  katexCopyTexJS: katex/0.15.1/files/dist/contrib/copy-tex.min.js
+  katexMhchemJS: katex/0.15.1/files/dist/contrib/mhchem.min.js
+  # lightgallery.js@1.4.0
+  lightgalleryCSS: lightgallery.js/1.4.0/files/dist/css/lightgallery.min.css
+  lightgalleryJS: lightgallery.js/1.4.0/files/dist/js/lightgallery.min.js
+  lightgalleryThumbnailJS: lg-thumbnail.js/1.2.0/files/dist/lg-thumbnail.min.js
+  lightgalleryZoomJS: lg-zoom.js/1.3.0/files/dist/lg-zoom.min.js
+  # mapbox-gl@2.3.1
+  mapboxGLCSS: mapbox-gl/2.3.1/files/dist/mapbox-gl.min.css
+  mapboxGLJS: mapbox-gl/2.3.1/files/dist/mapbox-gl.min.js
+  # mermaid@8.13.3
+  mermaidJS: mermaid/8.13.3/files/dist/mermaid.min.js
+  # meting@2.0.1
+  metingJS: meting/2.0.1/files/dist/Meting.min.js
+  # sharer.js@0.4.2
+  sharerJS: sharer.js/0.4.2/files/sharer.min.js
+  # twemoji@13.1.0
+  twemojiJS: twemoji/13.1.0/files/dist/twemoji.min.js
+  # twikoo@1.6.16
+  twikooAllJS: twikoo/1.6.16/files/dist/twikoo.all.min.js
+  # valine@1.4.18
+  valineJS: valine/1.4.18/files/dist/Valine.min.js
+  # waline@2.14.2
+  walineJS: '@waline/client/2.14.2/files/dist/waline.min.js'
+  walineCSS: '@waline/client/2.14.2/files/dist/waline.min.css'

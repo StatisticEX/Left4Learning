@@ -1,0 +1,35 @@
+{{- /* 面包屑导航结构化数据 - BreadcrumbList Schema */ -}}
+{{- if not .IsHome -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "{{ .Site.BaseURL }}"
+    }
+    {{- $position := 2 -}}
+    {{- if .Section -}}
+    ,{
+      "@type": "ListItem",
+      "position": {{ $position }},
+      "name": "{{ with .Site.GetPage (printf "/%s" .Section) }}{{ .Title }}{{ else }}{{ .Section | humanize | title }}{{ end }}",
+      "item": "{{ .Site.BaseURL }}{{ .Section }}/"
+    }
+    {{- $position = add $position 1 -}}
+    {{- end -}}
+    {{- if .IsPage -}}
+    ,{
+      "@type": "ListItem",
+      "position": {{ $position }},
+      "name": "{{ .Title }}",
+      "item": "{{ .Permalink }}"
+    }
+    {{- end -}}
+  ]
+}
+</script>
+{{- end -}}
