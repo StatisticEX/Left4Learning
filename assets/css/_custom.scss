@@ -331,6 +331,9 @@
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid var(--global-border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem; /* 使用 gap 实现均匀的行间距 */
 }
 
 .stat-item {
@@ -338,13 +341,8 @@
     align-items: center;
     justify-content: center;
     gap: 0.35rem;
-    margin-bottom: 0.6rem;
     font-size: 0.9rem;
     color: var(--global-font-secondary-color);
-}
-
-.stat-item:last-child {
-    margin-bottom: 0;
 }
 
 .stat-icon {
