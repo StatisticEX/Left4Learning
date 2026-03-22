@@ -6,7 +6,7 @@ lastmod: 2026-03-11
 draft: false
 authors: [Yansong Chen]
 description: ""
-slug: "coni-mpc-2026-03-11"
+slug: "coni-mpc-cooperative-non-inertial-frame-based-model-predictive-control"
 
 tags: ["MPC"]
 categories: ["论文阅读"]

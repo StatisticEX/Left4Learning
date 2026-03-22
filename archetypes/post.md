@@ -6,6 +6,7 @@ lastmod: {{ .Date }}
 draft: true
 authors: [Yansong Chen]
 description: ""
+slug: ""
 
 tags: []
 categories: []

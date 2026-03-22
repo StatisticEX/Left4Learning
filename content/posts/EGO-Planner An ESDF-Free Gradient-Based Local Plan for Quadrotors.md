@@ -6,7 +6,7 @@ lastmod: 2026-03-11
 draft: false
 authors: [Yansong Chen]
 description: ""
-slug: "ego-planner-2026-03-11"
+slug: "ego-planner-an-esdf-free-gradient-based-local-planner-for-quadrotors"
 
 tags: ["无人机"]
 categories: ["论文阅读"]

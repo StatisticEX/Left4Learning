@@ -6,7 +6,7 @@ lastmod: 2026-03-11
 draft: false
 authors: [Yansong Chen]
 description: ""
-slug: "effective-cpp-3rd-edition-ch5-2026-03-11"
+slug: "effective-cpp-3rd-edition-ch5"
 
 tags: ["C++"]
 categories: ["编程语言"]

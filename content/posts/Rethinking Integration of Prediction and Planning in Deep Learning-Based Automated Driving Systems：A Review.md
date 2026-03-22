@@ -6,7 +6,7 @@ lastmod: 2026-03-11
 draft: false
 authors: [Yansong Chen]
 description: ""
-slug: "rethinking-integration-of-prediction-and-planning-in-deep-learning-based-automated-driving-systems-a-review-2026-03-11"
+slug: "rethinking-integration-of-prediction-and-planning-in-deep-learning-based-automated-driving-systems-a-review"
 
 tags: ["深度学习", "自动驾驶"]
 categories: ["论文阅读"]

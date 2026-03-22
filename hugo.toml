@@ -12,7 +12,8 @@ theme = "DoIt"
 # Permalinks 配置
 [Permalinks]
   # posts = ":year/:month/:contentbasename"
-  posts = ":contentbasename"
+  # posts = ":contentbasename"
+  posts = ":year-:month-:day/:slug"
 
 # 隐私信息配置
 [privacy]
