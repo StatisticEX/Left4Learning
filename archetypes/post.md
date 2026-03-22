@@ -1,12 +1,12 @@
 ---
 title: "{{ replace .TranslationBaseName "-" " " | title }}"
 subtitle: ""
-date: {{ .Date }}
-lastmod: {{ .Date }}
+date: {{ dateFormat "2006-01-02" .Date }}
+lastmod: {{ dateFormat "2006-01-02" .Date }}
 draft: true
 authors: [Yansong Chen]
 description: ""
-slug: ""
+slug: '{{ .TranslationBaseName }}'
 
 tags: []
 categories: []
@@ -18,6 +18,7 @@ hiddenFromSearch: false
 featuredImage: ""
 featuredImagePreview: ""
 
+summaryContent: "summary"
 toc:
   enable: true
   auto: false
