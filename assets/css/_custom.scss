@@ -492,3 +492,104 @@
     opacity: 0.7;
     font-size: 0.8em;
 }
+
+/* ===== 目录（TOC）有序列表样式支持 ===== */
+/* 当 markup.toml 中设置 ordered = true 时，目录会使用 <ol> 标签 */
+/* 这里添加对 <ol> 的样式支持，使其与 <ul> 保持一致 */
+
+.toc {
+  .toc-content {
+    /* 为 <ol> 添加与 <ul> 相同的样式 */
+    ol {
+      text-indent: -0.85rem;
+      padding-left: 0.8rem;
+      list-style: none;
+
+      a:first-child::before {
+        content: "|";
+        font-weight: bolder;
+        margin-right: 0.5rem;
+        color: var(--single-link-color);
+      }
+
+      ol {
+        padding-left: 1.5rem;
+      }
+    }
+  }
+}
+
+/* 自动目录（侧边栏）中的有序列表样式 */
+#toc-auto {
+  .toc-content {
+    &.always-active ol {
+      display: block;
+    }
+
+    > nav > ol {
+      margin: 0.625rem 0;
+    }
+
+    ol {
+      ol {
+        display: none;
+      }
+
+      .has-active > ol {
+        display: block;
+      }
+    }
+
+    a.active {
+      font-weight: bold;
+      color: var(--single-link-color);
+
+      &::before {
+        color: var(--single-link-hover-color);
+      }
+    }
+  }
+}
+
+/* 静态目录中的有序列表样式 */
+#toc-static {
+  .toc-content {
+    > nav > ol {
+      margin: 0;
+      padding: 0.4rem 1rem 0.4rem 1.8rem;
+    }
+  }
+}
+
+/* ===== 主页预览目录深度控制 ===== */
+/* 控制预览中显示的目录嵌套层级 */
+
+/* 只显示1层（顶层标题） */
+.toc-preview.toc-depth-1 ul ul,
+.toc-preview.toc-depth-1 ol ol {
+  display: none !important;
+}
+
+/* 只显示2层 */
+.toc-preview.toc-depth-2 ul ul ul,
+.toc-preview.toc-depth-2 ol ol ol {
+  display: none !important;
+}
+
+/* 只显示3层 */
+.toc-preview.toc-depth-3 ul ul ul ul,
+.toc-preview.toc-depth-3 ol ol ol ol {
+  display: none !important;
+}
+
+/* 只显示4层 */
+.toc-preview.toc-depth-4 ul ul ul ul ul,
+.toc-preview.toc-depth-4 ol ol ol ol ol {
+  display: none !important;
+}
+
+/* 只显示5层 */
+.toc-preview.toc-depth-5 ul ul ul ul ul ul,
+.toc-preview.toc-depth-5 ol ol ol ol ol ol {
+  display: none !important;
+}

@@ -37,3 +37,4 @@
 [tableOfContents]
   startLevel = 1
   endLevel = 6
+  ordered = true

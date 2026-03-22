@@ -75,10 +75,34 @@
 
     {{- /* Summary content */ -}}
     <div class="content">
-        {{- with .Summary -}}
-            {{- dict "Content" . "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+        {{- /* Check for page-level summaryContent, fallback to global config */ -}}
+        {{- $summaryContent := .Params.summaryContent | default (.Site.Params.home.posts.summaryContent | default "summary") -}}
+        {{- if eq $summaryContent "toc" -}}
+            {{- /* Display Table of Contents */ -}}
+            {{- with .TableOfContents -}}
+                {{- /* Get summary TOC depth (how many levels to show) */ -}}
+                {{- $tocDepth := $.Params.summaryTocDepth | default 99 -}}
+                <div class="toc-preview toc-depth-{{ $tocDepth }}">
+                    <h3 class="toc-preview-title">{{ T "contents" }}</h3>
+                    {{- /* Replace relative anchor links with absolute links to article */ -}}
+                    {{- $toc := replace . `href="#` (printf `href="%s#` $.RelPermalink) -}}
+                    {{- dict "Content" $toc "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+                </div>
+            {{- else -}}
+                {{- /* Fallback to summary if no TOC */ -}}
+                {{- with .Summary -}}
+                    {{- dict "Content" . "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+                {{- else -}}
+                    {{- .Description | safeHTML -}}
+                {{- end -}}
+            {{- end -}}
         {{- else -}}
-            {{- .Description | safeHTML -}}
+            {{- /* Display Summary (default) */ -}}
+            {{- with .Summary -}}
+                {{- dict "Content" . "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+            {{- else -}}
+                {{- .Description | safeHTML -}}
+            {{- end -}}
         {{- end -}}
     </div>
 
