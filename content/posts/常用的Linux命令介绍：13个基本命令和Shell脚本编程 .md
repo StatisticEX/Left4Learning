@@ -6,6 +6,7 @@ lastmod: 2026-03-11
 draft: false
 authors: [Yansong Chen]
 description: ""
+slug: "linux-commands-2026-03-11"
 
 tags: ["编程"]
 categories: []
